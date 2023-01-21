@@ -1,0 +1,15 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  host: db
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: postgres
+  password: postgres
+
+development:
+  <<: *default
+  database: visable-bank_development
+
+test:
+  <<: *default
+  database: visable-bank_test
