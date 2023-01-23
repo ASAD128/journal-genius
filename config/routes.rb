@@ -1,6 +1,14 @@
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  namespace :api do
+    namespace :v1 do
+      resources :accounts, only: [:show, :index] do
+        collection do
+          get 'accounts', to: 'accounts#index'
+          get 'accounts/:id', to: 'accounts#show'
+        end
+      end
 
-  # Defines the root path route ("/")
-  # root "articles#index"
+      resources :funds_transfer
+    end
+  end
 end
