@@ -1,24 +1,44 @@
-# README
+# Visable Bank
+## Overview and Features
+- Restful API based double entry Accounting Application. 
+- Can transfer funds from one account to another
+- Can view last 10 transaction of any account
+- System is build considering Journal Double Entry where against each transaction
+  there's one journal entry and two postings. 
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Models
+- *Account*:
+  Store all the data related to accounts
+- *Transaction*:
+   All the transaction recorded here
+- *Journal*:
+   Against each transaction there's journal entry
+- *Posting*:
+   Each journal entry has two postings 
+   
+## APIs
+- `POST http://0.0.0.0:3000/api/v1/accounts?name=Mikey&balance_cents=5000` 
+- `GET http://0.0.0.0:3000/api/v1/accounts`
+- `POST http://0.0.0.0:3000/api/v1/funds_transfer?source_account=26&destination_account=25&amount_cents=2000`
+- `SHOW http://0.0.0.0:3000/api/v1/accounts/25`
 
-Things you may want to cover:
 
-* Ruby version
+## Ruby
+ruby 3.1.3
 
-* System dependencies
+## Rails
+Rails 7.0.4.1 
 
-* Configuration
+## Docker
+`docker compose build`
+`docker compose up`
 
-* Database creation
+## Database
+Postgresql 
+`rake db:create`
+`rake db:migrate`
+`rake db:seed`
 
-* Database initialization
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## Rspec 
+`Rspec` & `FactoryBot` used to write the specs

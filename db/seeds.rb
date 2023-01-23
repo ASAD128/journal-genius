@@ -1,13 +1,10 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
-#   Character.create(name: "Luke", movie: movies.first)
 
 puts "Seeding..."
 
 Account.find_or_create_by(name: 'CashBook', account_number: '00001111', currency: "USD")
+
+# Only Cashbook account created via seed rest of the accounts should be created via post request
+# POST http://0.0.0.0:3000/api/v1/accounts?name=Mikey&balance_cents=5000
+
 
 puts "Seeding done."
