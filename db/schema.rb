@@ -10,16 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_21_180536) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_21_173850) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "accounts", force: :cascade do |t|
     t.string "name", default: "", null: false
-    t.integer "user_id"
     t.string "account_number", default: "", null: false
-    t.bigint "balance_cents"
-    t.string "currency"
+    t.bigint "balance_cents", default: 0
+    t.string "currency", default: "USD"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["account_number"], name: "index_accounts_on_account_number", unique: true
@@ -35,7 +34,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_21_180536) do
 
   create_table "postings", force: :cascade do |t|
     t.bigint "amount_cents"
-    t.string "currency"
+    t.string "currency", default: "USD"
     t.integer "account_id"
     t.integer "journal_id"
     t.datetime "created_at", null: false
@@ -44,23 +43,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_21_180536) do
 
   create_table "transactions", force: :cascade do |t|
     t.bigint "amount_cents"
-    t.string "currency"
+    t.string "currency", default: "USD"
     t.integer "source_account_id"
     t.integer "destination_account_id"
     t.integer "transaction_type"
     t.integer "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["destination_account_id"], name: "index_transactions_on_destination_account_id", unique: true
-    t.index ["source_account_id"], name: "index_transactions_on_source_account_id", unique: true
-  end
-
-  create_table "users", force: :cascade do |t|
-    t.string "name", default: "", null: false
-    t.string "email", default: "", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["destination_account_id"], name: "index_transactions_on_destination_account_id"
+    t.index ["source_account_id"], name: "index_transactions_on_source_account_id"
   end
 
 end

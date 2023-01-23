@@ -5,3 +5,9 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+
+puts "Seeding..."
+
+Account.find_or_create_by(name: 'CashBook', account_number: '00001111', currency: "USD")
+
+puts "Seeding done."
