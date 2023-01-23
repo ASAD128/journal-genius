@@ -10,10 +10,15 @@ class TransferFunds
   end
 
   def call
-    create_transaction
-    create_journal_entry
-    update_account_balances
-    return success
+      result = create_transaction
+      if result[:success] == true
+        create_journal_entry
+        update_account_balances
+        return success
+      else
+        return fail("Transaction not successful")
+      end
+
   rescue ActiveRecord::RecordInvalid => e
     return fail(e)
   end
@@ -29,6 +34,7 @@ class TransferFunds
         status: Transaction.statuses[:processing],
         transaction_type: transaction_type
       )
+      success
     else
       fail("Source or destination account not found")
     end
